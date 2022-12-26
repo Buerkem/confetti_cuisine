@@ -1,12 +1,16 @@
 const User = require("../models/user");
 
 module.exports = {
-    indexView: (req, res) =>{
+    index : (req,res, next) =>{
         User.find({}).then(
             users => {
-                res.render("users/index", {users: users})
+                res.locals.users = users;
+                next()
             }
         )
     },
-
+    
+    indexView: (req, res) =>{
+        res.render("users/new", {users: res.locals.users})
+    },
 }

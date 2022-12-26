@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use( express.static( "public" ) );
 app.use(layouts);
 
-app.get("/", userController.indexView)
+app.get("/", userController.index, userController.indexView)
 //app.get("/index", userController.indexView)
 app.get("/contact", subscriberController.getSubscriptionPage)
 app.get("/subscribers", subscriberController.getAllSubscribers)
