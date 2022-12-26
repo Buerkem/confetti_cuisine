@@ -5,20 +5,24 @@
                 <img class="./images/images.css#img" src="./images/computer_network.jpg" alt="computer_network image">
             </div>
             <div class="col d-flex align-items-center">
-                <form action="/contact" method="post">
-                    <p>Reach out to us</p>
-                    <p>Enter your email if you're interested to learn more: </p>
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email">
-                        <label for="zipcode">Zip Code</label>
-                        <input type="text" class="form-control" name="zipcode">
-                        <button type="submit" class="btn btn-primary">Submit</button>    
-                    </div>
-                    <p>We'll get back to you soon</p>
-                </form>
+                <div class="row">
+                    <form action="/subscribe" method="post">
+                        <p>Reach out to us</p>
+                        <p>Enter your email if you're interested to learn more: </p>
+                        <form class="form-group"  action="/subscribe" method="post">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" name="name">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" name="email">
+                            <label for="zipcode">Zip Code</label>
+                            <input type="text" class="form-control" name="zipcode">
+                            <button type="submit" class="btn btn-primary">Submit</button>    
+                        </form>
+                        <br/>
+                        <p>We'll get back to you soon</p>
+                    </form>
+
+                </div>
             </div>
 
         </div>

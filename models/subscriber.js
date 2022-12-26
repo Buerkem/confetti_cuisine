@@ -6,4 +6,11 @@ subscriberSchema = mongoose.Schema({
     zipCode: Number
 });
 
+mongoose.connect(
+    "mongodb://localhost:27017/recipe_db",
+    {useNewUrlParser: true}
+    );
+
+mongoose.Promise = global.Promise;
+
 module.exports = mongoose.model("Subscriber", subscriberSchema);
