@@ -41,5 +41,8 @@ userSchema = new Schema({
 userSchema.virtual("fullName").get(function(){
     return `${this.name.first} ${this.name.last}`;
 })
-
+mongoose.connect(
+    "mongodb://localhost:27017/recipe_db",
+    {useNewUrlParser: true}
+    );
 module.exports = mongoose.model("User", userSchema);

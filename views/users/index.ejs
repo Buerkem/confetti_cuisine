@@ -1,0 +1,20 @@
+<body>
+    <h1>Users Table</h1>
+    <table class="container">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Zip Code</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% users.forEach(u => {%>
+                <td> <%= u.fullName %> </td>
+                <td> <%= u.email %></td>
+                <td> <%= u.zipcode %></td>
+            <% }); %>
+        </tbody>
+    </table>
+</body>

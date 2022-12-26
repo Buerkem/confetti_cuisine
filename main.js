@@ -16,6 +16,7 @@ app.use( express.static( "public" ) );
 app.use(layouts);
 
 app.get("/", userController.indexView)
+//app.get("/index", userController.indexView)
 app.get("/contact", subscriberController.getSubscriptionPage)
 app.get("/subscribers", subscriberController.getAllSubscribers)
 app.get("/courses", courseController.CourseView)
