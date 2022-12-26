@@ -1,0 +1,24 @@
+<body>
+    <h1>User Data for <%= u.fullName %></h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <td><%= u.fullName %></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><%= u.email %></td>
+        </tr>
+        <tr>
+            <th>Zip Code</th>
+            <td><%= u.zipCode %></td>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td><%= u.password %></td>
+        </tr>
+    </table>
+
+    <a class="btn btn-primary" href= "/users">View All Users</a>
+
+</body>

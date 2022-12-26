@@ -15,12 +15,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use( express.static( "public" ) );
 app.use(layouts);
 
-app.get("/", userController.index, userController.indexView)
-//app.get("/index", userController.indexView)
+app.get("/users", userController.index, userController.indexView)
+app.get("/users/edit/:userId", userController.editView)
+app.get("/users/:user_id", userController.userView)
+app.get("/new", userController.newView)
 app.get("/contact", subscriberController.getSubscriptionPage)
 app.get("/subscribers", subscriberController.getAllSubscribers)
 app.get("/courses", courseController.CourseView)
 app.post("/subscribe", subscriberController.saveSubscriber)
+app.post("/users/create", userController.create,userController.index, userController.indexView)
 
 app.use(errorController.pageNotFoundError)
 

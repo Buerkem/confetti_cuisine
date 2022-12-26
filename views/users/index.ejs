@@ -6,15 +6,22 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Zip Code</th>
+                <th>Edit</th>
             </tr>
         </thead>
 
         <tbody>
-            <% users.forEach(u => {%>
-                <td> <%= u.fullName %> </td>
-                <td> <%= u.email %></td>
-                <td> <%= u.zipcode %></td>
-            <% }); %>
+                <% users.forEach(u => {%>
+                    <tr>
+                        <td> 
+                            <a href="<%= `/users/${u._id}`%>"> <%= u.fullName %>
+                            </a>
+                        </td>
+                        <td> <%= u.email %></td>
+                        <td> <%= u.zipCode %></td>
+                        <td><a href="<%= `/users/edit/${u._id}`%>">Edit</a></td>
+                    </tr>
+                <% }); %>
         </tbody>
     </table>
 </body>

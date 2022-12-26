@@ -1,0 +1,20 @@
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Edit user: </h1>
+            <form class="row">
+                <label>First Name</label>
+                <input name="firstName" value="<%= user.name.first %>">
+                <label>Last Name</label>
+                <input name="lastName" value="<%= user.name.last%>">
+                <label>Password</label>
+                <input name="password" type="password" value="<%= user.password %>">
+                <label>Email address</label>
+                <input name="email" type="email" value="<%= user.email %>">
+                <label>Zip Code</label>
+                <input name="zipCode" value="<%= user.zipCode %>">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</body>
