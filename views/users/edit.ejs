@@ -2,11 +2,11 @@
     <div class="container">
         <div class="row">
             <h1>Edit user: </h1>
-            <form class="row">
+            <form class="row" method="POST"  action="<%=`/users/${user._id}/update?_method=PUT`%>">
                 <label>First Name</label>
-                <input name="firstName" value="<%= user.name.first %>">
+                <input name="first" value="<%= user.name.first %>">
                 <label>Last Name</label>
-                <input name="lastName" value="<%= user.name.last%>">
+                <input name="last" value="<%= user.name.last%>">
                 <label>Password</label>
                 <input name="password" type="password" value="<%= user.password %>">
                 <label>Email address</label>

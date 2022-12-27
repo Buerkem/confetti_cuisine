@@ -1,0 +1,24 @@
+<body>
+        <h1 class="mx-auto" style="width: fit-content;">Subscribers Table</h1>
+        <table class="container">
+            <thead>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </thead>
+            <tbody>
+                <% subscribers.forEach(s => {%>
+                    <tr>
+                        <td><%= s.name %></td>
+                        <td><%= s.email%></td>
+                        <td><%= s._id%></td>
+                        <td><a href="<%= `/subscribers/edit/${s._id}`%>">Edit</a></td>
+                        <td>Delete</td>
+                    </tr>
+                    <% })%>
+            </tbody>
+    </table>
+
+    </div>
+</body>

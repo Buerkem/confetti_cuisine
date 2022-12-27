@@ -12,13 +12,22 @@ courseSchema = mongoose.Schema({
         required: true
     },
 
-    items: [],
-
-    zipCode: {
+    maxStudents: {
         type: Number,
-        min: [10000, "Zip code too short"],
-        max: 99999
+        default: 0,
+        min: [0, "Course cannot have a negative number of students"]
+    },
+
+    cost: {
+        type: Number,
+        default: 0,
+        min: [0, "Course cannot have a negative cost"]
+    },
+    },
+    {
+        timestamps: true
     }
-})
+
+)
 
 module.exports = mongoose.Model("Course",courseSchema)

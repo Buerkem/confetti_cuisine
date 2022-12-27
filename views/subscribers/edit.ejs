@@ -1,0 +1,18 @@
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Edit subscriber: </h1>
+            <form class="row" method="POST" action="<%=`/subscribers/${subscriber._id}/update?_method=PUT`%>">
+                <label>Name</label>
+                <input name="last" value="<%= subscriber.name %>">
+                <label>Password</label>
+                <input name="password" type="password" value="<%= subscriber.password %>">
+                <label>Email address</label>
+                <input name="email" type="email" value="<%= subscriber.email %>">
+                <label>Zip Code</label>
+                <input name="zipCode" value="<%= subscriber.zipCode %>">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</body>
