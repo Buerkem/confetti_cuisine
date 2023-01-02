@@ -7,8 +7,10 @@ errorController = require("./controllers/errorController"),
 subscriberController = require("./controllers/subscriberController"),
 courseController = require("./controllers/courseController"),
 ejs = require("ejs"),
-bodyParser = require('body-parser');
-
+expressSession = require("express-session"),
+cookieParser = require("cookie-parser"),
+connectFlash = require("connect-flash"),
+bodyParser = require('body-parser'),
 app = express();
 
 app.set("view engine", 'ejs')
@@ -16,6 +18,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use( express.static( "public" ) );
 app.use(layouts);
 app.use(methodOverride("_method", {methods: ["POST","GET"]}));
+
+app.use(cookieParser("secret_passcode"));
+
+app.use(expressSession({
+    secret: "secret_passcode",
+    cookie: {
+        maxAge: 4000000
+    },
+    resave: false,
+    saveUninitialized: false
+}));
+
+
+app.use(connectFlash())
+
+app.use((req, res, next)=>{
+    res.locals.flashMessages = req.flash();
+    next();
+})
 
 app.get("/users", userController.index, userController.indexView)
 app.get("/users/edit/:userId", userController.editView)
@@ -27,7 +48,7 @@ app.get("/contact", subscriberController.getSubscriptionPage)
 app.get("/subscribers", subscriberController.getAllSubscribers, subscriberController.indexView)
 app.get("/courses", courseController.CourseView)
 app.post("/subscribe", subscriberController.saveSubscriber)
-app.post("/users/create", userController.create,userController.index, userController.indexView)
+app.post("/users/create", userController.create,userController.index, userController.redirectView)
 
 
 app.put("/users/:userId/update", userController.update, userController.redirectView)

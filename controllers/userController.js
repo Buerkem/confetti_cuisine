@@ -7,7 +7,7 @@ module.exports = {
                 res.locals.users = users;
                 next()
             }
-        )
+        ).catch(error => {console.log($(error.message))})
     },
 
     delete: (req, res, next) =>{
@@ -67,6 +67,8 @@ module.exports = {
     },
     
     indexView: (req, res) =>{
+        console.log(res.locals.flashMessages);
+        console.log('flash message above');
         res.render("users", {users: res.locals.users})
     },
 
@@ -93,6 +95,7 @@ module.exports = {
         })     
         newUser.save().then(
             user=>{
+                req.flash("success", `${newUser.fullName}'s account created successfully!`);
                 res.locals.redirect = "/users";
                 res.locals.user = user;
                 next();

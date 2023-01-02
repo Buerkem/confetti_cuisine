@@ -8,6 +8,13 @@
   </head>
   <body>
     <%-include('partials/navigation') %>
+    <div class="flashes">
+      <% if (flashMessages.success) { %>
+        <div class="alert alert-success"><%= flashMessages.success %></div>
+      <% } else if (flashMessages.error) { %>
+        <div class="flash error"><%= flashMessages.error %></div>
+      <% } %>
+    </div>
     <%- body %>
   </body>
 </html>
