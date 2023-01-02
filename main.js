@@ -11,6 +11,7 @@ expressSession = require("express-session"),
 cookieParser = require("cookie-parser"),
 connectFlash = require("connect-flash"),
 bodyParser = require('body-parser'),
+passport = require('passport'),
 app = express();
 
 app.set("view engine", 'ejs')
@@ -39,6 +40,7 @@ app.use((req, res, next)=>{
 })
 
 app.get("/users", userController.index, userController.indexView)
+app.get("/users/login", userController.loginView)
 app.get("/users/edit/:userId", userController.editView)
 app.get("/subscribers/edit/:subscriberId", subscriberController.editView)
 app.get("/users/:user_id", userController.userView)
@@ -49,6 +51,7 @@ app.get("/subscribers", subscriberController.getAllSubscribers, subscriberContro
 app.get("/courses", courseController.CourseView)
 app.post("/subscribe", subscriberController.saveSubscriber)
 app.post("/users/create", userController.create,userController.index, userController.redirectView)
+app.post("/users/login", userController.authenticate, userController.redirectView)
 
 
 app.put("/users/:userId/update", userController.update, userController.redirectView)

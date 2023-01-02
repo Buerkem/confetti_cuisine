@@ -50,6 +50,28 @@ module.exports = {
             });
     },
 
+    authenticate: (req, res, next)=>{
+        User.findOne({email:req.body.email}).then(user=>{
+            if (user){
+                user.passwordComparison(req.body.password).then(passwordsMatch =>{
+                    if (passwordsMatch){
+                        res.locals.redirect =`/users/${user._id}`;
+                        req.flash("success", `${user.fullName}'s logged in successfully!`);
+                        res.locals.user = user;
+                        next();
+                    }
+                    else{
+                        req.flash("error" , "Your account or password is incorrect. Please try again or contact your system administrator!");
+                        res.locals.redirect = "/users/login";
+                        next();
+                    }            
+        }).catch(error => {
+            console.log(`Error logging in user: ${error.message}`);
+            next(error);
+            })
+        }
+    })},
+
     userView : (req, res, next) =>{
         let userId = req.params.user_id;
         User.findById(userId).then( user=>{
@@ -74,6 +96,10 @@ module.exports = {
 
     newView : (req, res) => {
         res.render("users/new", {users: res.locals.users})
+    },
+
+    loginView: (req, res) =>{
+        res.render("users/login")
     },
 
     redirectView: (req, res, next)=>{

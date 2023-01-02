@@ -12,7 +12,7 @@
       <% if (flashMessages.success) { %>
         <div class="alert alert-success"><%= flashMessages.success %></div>
       <% } else if (flashMessages.error) { %>
-        <div class="flash error"><%= flashMessages.error %></div>
+        <div class="alert alert-error"><%= flashMessages.error %></div>
       <% } %>
     </div>
     <%- body %>
