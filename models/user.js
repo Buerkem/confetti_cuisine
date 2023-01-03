@@ -1,8 +1,10 @@
-const subscriber = require("./subscriber");
+const passport = require("passport");
 
-const mongoose = require("mongoose"),
+const subscriber = require("./subscriber"),
+mongoose = require("mongoose"),
 Subscriber = require("./subscriber"),
 bcrypt = require("bcrypt"),
+passportLocalMongoose = require("passport-local-mongoose"),
 {Schema} = mongoose,
 
 userSchema = new Schema({
@@ -45,6 +47,10 @@ userSchema.virtual("fullName").get(function(){
     return `${this.name.first} ${this.name.last}`;
 })
 
+userSchema.plugin(passportLocalMongoose, {
+    usernameField: "email"
+});
+
 userSchema.methods.passwordComparison = function(inputPassword){
     let user = this;
     return bcrypt.compare(inputPassword, user.password);
@@ -54,26 +60,20 @@ userSchema.pre("save", function(next){
     let user  = this;
 
     //hash user password for security reasons
-    bcrypt.hash(user.password, 10).then(hash => {
-        user.password = hash;
-        if (!('subscribedAccount') in user){
-                Subscriber.findOne({
-                    "email" : user.email
-                }).then(subscriber=> {
-                    user.subscribedAccount = subscriber;
-                    next();
-                }).catch(error => {
-                        console.log("Error connecting to subscriber");
-                        next(error);
-                    })
-            }
-            else {
+    if (!('subscribedAccount') in user){
+            Subscriber.findOne({
+                "email" : user.email
+            }).then(subscriber=> {
+                user.subscribedAccount = subscriber;
                 next();
-            }
-    }).catch(error => {
-        console.log(error);
-        next(error)
-    })
+            }).catch(error => {
+                    console.log("Error connecting to subscriber");
+                    next(error);
+                })
+        }
+        else {
+            next();
+        }
 
 })
 

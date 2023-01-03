@@ -6,6 +6,7 @@ userController = require("./controllers/userController"),
 errorController = require("./controllers/errorController"),
 subscriberController = require("./controllers/subscriberController"),
 courseController = require("./controllers/courseController"),
+User = require("./models/user"),
 ejs = require("ejs"),
 expressSession = require("express-session"),
 cookieParser = require("cookie-parser"),
@@ -31,11 +32,18 @@ app.use(expressSession({
     saveUninitialized: false
 }));
 
+app.use(connectFlash());
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use(connectFlash())
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next)=>{
     res.locals.flashMessages = req.flash();
+    res.locals.loggedIn = req.isAuthenticated();
+    res.locals.currentUser = req.user;
     next();
 })
 
@@ -43,6 +51,7 @@ app.get("/users", userController.index, userController.indexView)
 app.get("/users/login", userController.loginView)
 app.get("/users/edit/:userId", userController.editView)
 app.get("/subscribers/edit/:subscriberId", subscriberController.editView)
+app.get("/users/logout", userController.logout, userController.redirectView)
 app.get("/users/:user_id", userController.userView)
 app.get("/subscribers/:subscriberId", subscriberController.subscriberView)
 app.get("/new", userController.newView)
@@ -51,7 +60,7 @@ app.get("/subscribers", subscriberController.getAllSubscribers, subscriberContro
 app.get("/courses", courseController.CourseView)
 app.post("/subscribe", subscriberController.saveSubscriber)
 app.post("/users/create", userController.create,userController.index, userController.redirectView)
-app.post("/users/login", userController.authenticate, userController.redirectView)
+app.post("/users/login", userController.authenticate)
 
 
 app.put("/users/:userId/update", userController.update, userController.redirectView)

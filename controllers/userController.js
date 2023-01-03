@@ -1,3 +1,4 @@
+const passport = require("passport");
 const User = require("../models/user");
 
 module.exports = {
@@ -50,28 +51,6 @@ module.exports = {
             });
     },
 
-    authenticate: (req, res, next)=>{
-        User.findOne({email:req.body.email}).then(user=>{
-            if (user){
-                user.passwordComparison(req.body.password).then(passwordsMatch =>{
-                    if (passwordsMatch){
-                        res.locals.redirect =`/users/${user._id}`;
-                        req.flash("success", `${user.fullName}'s logged in successfully!`);
-                        res.locals.user = user;
-                        next();
-                    }
-                    else{
-                        req.flash("error" , "Your account or password is incorrect. Please try again or contact your system administrator!");
-                        res.locals.redirect = "/users/login";
-                        next();
-                    }            
-        }).catch(error => {
-            console.log(`Error logging in user: ${error.message}`);
-            next(error);
-            })
-        }
-    })},
-
     userView : (req, res, next) =>{
         let userId = req.params.user_id;
         User.findById(userId).then( user=>{
@@ -79,6 +58,20 @@ module.exports = {
         }
         )
     },
+
+    authenticate: passport.authenticate("local",{
+        failureRedirect: "/users/login",
+        failureFlash: "Failed to login",
+        successRedirect: "/",
+        successFlash: "Logged in!" 
+    }),
+
+    logout: (req, res, next) => {
+        req.logout(error=> {console.log(error)});
+        req.flash("success", "You have been logged out!");
+        res.locals.redirect = "/";
+        next();
+        },
 
     editView : (req, res, next) =>{
         let userId = req.params.userId;
@@ -119,13 +112,19 @@ module.exports = {
             zipCode: req.body.zipCode,
             password: req.body.password,
         })     
-        newUser.save().then(
-            user=>{
+        User.register(newUser, req.body.password, (error, user)=>{
+            if (user){
                 req.flash("success", `${newUser.fullName}'s account created successfully!`);
                 res.locals.redirect = "/users";
                 res.locals.user = user;
                 next();
             }
+            else{
+                req.flash("error",`Failed to create user account because: ${error.message}.` )
+                res.locals.redirect = "/users/new";
+                next();
+            }
+        }
         )
     }
 }
