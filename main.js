@@ -1,5 +1,6 @@
 const port=3000,
 express = require("express"),
+router = require("./routes/index"),
 methodOverride = require("method-override"),
 layouts = require("express-ejs-layouts"),
 userController = require("./controllers/userController"),
@@ -46,26 +47,8 @@ app.use((req, res, next)=>{
     res.locals.currentUser = req.user;
     next();
 })
-
-app.get("/users", userController.index, userController.indexView)
-app.get("/users/login", userController.loginView)
-app.get("/users/edit/:userId", userController.editView)
-app.get("/subscribers/edit/:subscriberId", subscriberController.editView)
-app.get("/users/logout", userController.logout, userController.redirectView)
-app.get("/users/:user_id", userController.userView)
-app.get("/subscribers/:subscriberId", subscriberController.subscriberView)
-app.get("/new", userController.newView)
-app.get("/contact", subscriberController.getSubscriptionPage)
-app.get("/subscribers", subscriberController.getAllSubscribers, subscriberController.indexView)
-app.get("/courses", courseController.CourseView)
-app.post("/subscribe", subscriberController.saveSubscriber)
-app.post("/users/create", userController.create,userController.index, userController.redirectView)
-app.post("/users/login", userController.authenticate)
+app.use("/", router)
 
 
-app.put("/users/:userId/update", userController.update, userController.redirectView)
-app.put("/subscribers/:subscriberId/update", subscriberController.update, subscriberController.redirectView)
-app.delete("/users/:userId/delete", userController.delete, userController.redirectView)
 app.use(errorController.pageNotFoundError)
-
 app.listen(port, ()=>{console.log(`App is listening on ${port}`)})
