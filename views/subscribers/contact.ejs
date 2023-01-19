@@ -1,13 +1,11 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col">
-                <img class="./images/images.css#img" src="./images/computer_network.jpg" alt="computer_network image">
-            </div>
+            <img class="img col" src="/images/computer_network.jpg" alt="computer_network image">
             <div class="col d-flex align-items-center">
                 <div class="row">
-                    <form action="/subscribe" method="post">
-                        <p>Reach out to us</p>
+                    <form class="form-signin" action="/subscribers/subscribe" method="post">
+                        <h2>Reach out to us</h2>
                         <p>Enter your email if you're interested to learn more: </p>
                         <form class="form-group"  action="/subscribe" method="post">
                             <label for="name">Name</label>
@@ -16,6 +14,7 @@
                             <input type="email" class="form-control" name="email">
                             <label for="zipcode">Zip Code</label>
                             <input type="text" class="form-control" name="zipcode">
+                            <br/>
                             <button type="submit" class="btn btn-primary">Submit</button>    
                         </form>
                         <br/>

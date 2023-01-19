@@ -3,10 +3,7 @@ express = require("express"),
 router = require("./routes/index"),
 methodOverride = require("method-override"),
 layouts = require("express-ejs-layouts"),
-userController = require("./controllers/userController"),
 errorController = require("./controllers/errorController"),
-subscriberController = require("./controllers/subscriberController"),
-courseController = require("./controllers/courseController"),
 User = require("./models/user"),
 ejs = require("ejs"),
 expressSession = require("express-session"),
@@ -47,8 +44,8 @@ app.use((req, res, next)=>{
     res.locals.currentUser = req.user;
     next();
 })
-app.use("/", router)
 
+app.use("/", router)
 
 app.use(errorController.pageNotFoundError)
 app.listen(port, ()=>{console.log(`App is listening on ${port}`)})

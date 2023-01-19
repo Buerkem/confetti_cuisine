@@ -1,0 +1,34 @@
+.login {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    padding: 10px;
+    background: #c1ffc1;
+    border-radius: 20px;
+    text-decoration: none;
+    display: block;
+  }
+
+.img{
+    width: 400px;
+    height: 400px;
+  }
+
+.data-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.data-form label {
+  margin: 5px 0 0 0;
+}
+
+.nav-link-hover:hover{
+    background-color: lightblue;
+}
+
+.fit-height{
+    background-color: lightgreen;
+    height: auto; 
+    padding: 0px;
+}

@@ -1,12 +1,10 @@
 <body>
     <div class="container-sm mx-auto">
-        <div class="row">
+        <div class="row data-form form-group">
             <h1>Login: </h1>
             <form  class="row" action="/users/login" method="post">
-                <label>Email address: </label>
-                <input type="text" name="email">
-                <label>Password</label>
-                <input type="text" name="password">
+                <input class="form-control" type="email" name="email" label="email" placeholder="email">
+                <input class="form-control" type="password" name="password" placeholder="password">
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
         </div>

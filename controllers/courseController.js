@@ -14,7 +14,13 @@ var courses = [
      
 
 module.exports = {
-    CourseView : (req, resp)=>{
-        resp.render("./courses/course.ejs", {courses: courses}) 
-    }
+    indexView: (req, res)=>{
+        if (req.query.format == "json"){
+            res.json(courses);
+        }
+
+        else {
+            res.render("./courses/index", {courses: courses}) 
+        }
+    },
 }
