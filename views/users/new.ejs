@@ -1,19 +1,19 @@
 <body>
     <div class="container-sm mx-auto">
         <div class="row">
-            <h1>Create a new user</h1>
-            <form  class="row" action="users/create" method="post">
+            <form  class="row form-sign data-form" action="users/create" method="post">
+                <h2 class="form-signin-heading">Create a new user</h2>
                 <label>First Name</label>
-                <input type="text" name="first">
+                <input class="form-control" type="text" name="first" placeholder="First Name">
                 <label>Last Name</label>
-                <input type="text" name="last">
+                <input class="form-control" type="text" name="last" placeholder="Last Name">
                 <label>Password</label>
-                <input type="text" name="password">
+                <input class="form-control" type="text" name="password" placeholder="Password">
                 <label>Email address</label>
-                <input type="email" name="email">
+                <input class="form-control" type="email" name="email" placeholder="Email">
                 <label>Zip Code</label>
-                <input type="text" name="zipCode">
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <input class="form-control" type="text" name="zipCode" placeholder="Zip Code">
+                <button type="submit" class="btn btn-primary">Create</button>
             </form>
         </div>
     </div>

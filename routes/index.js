@@ -6,6 +6,6 @@ homeRoutes = require("../routes/homeRoutes");
 
 router.use("/users", userRoutes)
 router.use("/subscribers", subscribeRoutes)
-router.use("/course", courseRoutes),
+router.use("/courses", courseRoutes),
 router.use("/", homeRoutes),
 module.exports = router;

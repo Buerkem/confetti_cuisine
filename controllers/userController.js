@@ -12,7 +12,6 @@ module.exports = {
     },
 
     delete: (req, res, next) =>{
-        console.log("hello");
         let userId = req.params.userId;
         User.findByIdAndRemove(userId).then(
             ()=>{
@@ -26,7 +25,6 @@ module.exports = {
     },
 
     update: (req,res,next)=>{
-        console.log("here")
         let newParam = {
             name: {
                 first: req.body.first,
@@ -88,7 +86,7 @@ module.exports = {
     },
 
     newView : (req, res) => {
-        res.render("users/new", {users: res.locals.users})
+        res.render("users/new")
     },
 
     loginView: (req, res) =>{

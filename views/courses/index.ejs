@@ -1,15 +1,24 @@
 <body>
     <div class="container">
-        <div class="row">
-            <img class="col ./images/images.css#img" src="./images/food_image.png"/>
-            <div class="col">
-                <h1 class="col">Learn to cook cutting edge food</h1>
-                <h1>Our Courses</h1>
-                <% courses.forEach(c =>{ %>
-                    <p><%= c.name %></p>
-                    <p><%= c.price %></p>
-                <% }); %>
-            </div>
-        </div> 
+        <h2 class="center">Courses</h2>
+        <table class="container table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                    <% courses.forEach(c => {%>
+                        <tr>
+                            <td> <%= c.name%></td>
+                            <td> <%= c.description%></td>
+                            <td> $<%= c.price%></td>
+                        </tr>
+                    <% }); %>
+            </tbody>
+        </table>
     </div>
 </body>
