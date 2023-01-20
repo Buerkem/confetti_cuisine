@@ -1,4 +1,5 @@
 const port=3000,
+mongoose = require("mongoose"),
 express = require("express"),
 router = require("./routes/index"),
 methodOverride = require("method-override"),
@@ -12,6 +13,11 @@ connectFlash = require("connect-flash"),
 bodyParser = require('body-parser'),
 passport = require('passport'),
 app = express();
+
+mongoose.connect(process.env.MONGODB_URI ||
+    "mongodb://localhost:27017/recipe_db",
+    {useNewUrlParser: true}
+    );
 
 app.set("view engine", 'ejs')
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -48,4 +54,5 @@ app.use((req, res, next)=>{
 app.use("/", router)
 
 app.use(errorController.pageNotFoundError)
-app.listen(port, ()=>{console.log(`App is listening on ${port}`)})
+app.set("port", process.env.PORT || port);
+app.listen(app.get("port"), ()=>{console.log(`App is listening on ${port}`)})

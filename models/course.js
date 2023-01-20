@@ -30,11 +30,6 @@ courseSchema = mongoose.Schema({
     }
 )
 
-mongoose.connect(
-    "mongodb://localhost:27017/recipe_db",
-    {useNewUrlParser: true}
-    );
-
     /*
 Course = mongoose.model("Course",courseSchema)
 var testCourse
