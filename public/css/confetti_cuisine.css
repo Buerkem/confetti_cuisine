@@ -40,6 +40,11 @@
     background-color: lightblue;
 }
 
+.nav-link-active{
+    background-color: rgb(69, 187, 226);
+    color: white;
+}
+
 .fit-height{
     background-color: lightgreen;
     height: auto; 

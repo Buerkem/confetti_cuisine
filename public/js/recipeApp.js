@@ -1,9 +1,33 @@
 $(document).ready(() => {
+  $('.nav-link').on('click', function() {
+    sessionStorage.setItem('activeNavLink', $(this).attr('href'));
+    $('.nav-link').removeClass('nav-link-active');
+    $(this).addClass('nav-link-active');
+  });
+  
+  //Check if session storage has activeNavLink
+  if(sessionStorage.getItem('activeNavLink')){
+    //Get link by href
+    var $link = $('a[href="' + sessionStorage.getItem('activeNavLink') + '"]');
+    //Add active class to link
+    $link.addClass('nav-link-active');
+  }
+
     $("#modal-button").click( ()=>{
         $(".modal-body").html('');
         $.get("/api/courses?format=json", (results={})=>{
             let data = results.data;
             if (!data || !data.courses) return;
+            if (!data.loggedIn){
+                $(".modal-body").append(
+                    `
+                    <div>
+                    Please log in to register for a course.
+                    </div>
+                    `
+                )
+                return;
+            }
             data.courses.forEach(course => {
                 $(".modal-body").append(
                     `<div>
@@ -24,7 +48,7 @@ $(document).ready(() => {
             addJoinButtonListener();
         }            
         );
-        $('#myModal').modal('show'); 
+        $('#myModal').modal('show');
     });
 
 
