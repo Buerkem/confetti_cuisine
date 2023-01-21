@@ -1,3 +1,4 @@
+whoami
 wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | apt-key add -
 apt-get install gnupg
 wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | apt-key add -
