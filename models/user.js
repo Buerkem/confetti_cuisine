@@ -1,7 +1,6 @@
 const passport = require("passport");
-
+const mongoose= require("mongoose");
 const subscriber = require("./subscriber"),
-mongoose = require("mongoose"),
 Subscriber = require("./subscriber"),
 bcrypt = require("bcrypt"),
 passportLocalMongoose = require("passport-local-mongoose"),
@@ -78,8 +77,6 @@ userSchema.pre("save", function(next){
 })
 
 
-mongoose.connect(
-    "mongodb://localhost:27017/recipe_db",
-    {useNewUrlParser: true}
-    );
+
+
 module.exports = mongoose.model("User", userSchema);
