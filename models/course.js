@@ -15,7 +15,7 @@ courseSchema = mongoose.Schema({
 
     maxStudents: {
         type: Number,
-        default: 0,
+        default: 100,
         min: [0, "Course cannot have a negative number of students"]
     },
 

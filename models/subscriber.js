@@ -27,11 +27,6 @@ subscriberSchema.methods.getInfo = function(){
     return `Name: ${this.name} Email: ${this.email} Zip Code: ${this.zipCode}`;
 }
 
-mongoose.connect(
-    "mongodb://localhost:27017/recipe_db",
-    {useNewUrlParser: true}
-    );
-
 mongoose.Promise = global.Promise;
 
 module.exports = mongoose.model("Subscriber", subscriberSchema);

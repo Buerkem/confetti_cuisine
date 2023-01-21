@@ -13,11 +13,18 @@ connectFlash = require("connect-flash"),
 bodyParser = require('body-parser'),
 passport = require('passport'),
 app = express();
+dotenv = require('dotenv').config();
 
-mongoose.connect(process.env.MONGODB_URI ||
-    "mongodb://localhost:27017/recipe_db",
-    {useNewUrlParser: true}
-    );
+mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => {
+        console.log('Connected to Mongo!');
+    })
+    .catch((err) => {
+        console.error('Error connecting to Mongo', err);
+    });
 
 app.set("view engine", 'ejs')
 app.use(bodyParser.urlencoded({ extended: false }));
