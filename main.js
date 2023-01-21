@@ -62,4 +62,5 @@ app.use("/", router)
 
 app.use(errorController.pageNotFoundError)
 app.set("port", process.env.PORT || port);
+console.log("MONGO URI"+ process.env.MONGODB_URI );
 app.listen(app.get("port"), ()=>{console.log(`App is listening on ${port}`)})
